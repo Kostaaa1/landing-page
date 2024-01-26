@@ -1,8 +1,8 @@
 ---
-import { gradientVariants, backgroundVariants } from '../utils/state'
-let color: 'red' | 'green' | 'blue' | 'purple' = 'green'
+import { gradientVariants, backgroundVariants, type TColor } from '../state'
+let color: TColor = 'green'
 if (Astro.request.method === 'GET') {
-	color = Astro.request.url.split('=')[1] as 'red' | 'green' | 'blue' | 'purple'
+	color = Astro.request.url.split('=')[1] as TColor
 }
 export const partial = true
 ---
@@ -12,7 +12,7 @@ export const partial = true
 	class={`bg-gradient-to-r from-20% bg-clip-text text-transparent ${gradientVariants[color || 'green']}`}
 >
 	<h1
-		class="break-words text-center text-6xl font-bold max-[320px]:text-5xl sm:text-7xl md:text-8xl 2xl:text-9xl"
+		class="break-words text-center text-6xl font-bold max-[320px]:text-5xl sm:text-7xl md:text-9xl"
 	>
 		<span> Serverless</span>
 		<br />
@@ -22,6 +22,6 @@ export const partial = true
 <div
 	id="splat"
 	hx-swap-oob="true"
-	class={`w-max-full absolute left-1/2 top-1/2 -z-10 h-[400px] w-full -translate-x-1/2 -translate-y-1/2 bg-opacity-5 blur-[100px] ${backgroundVariants[color || 'green']}`}
+	class={`absolute left-1/2 top-1/2 -z-10 h-[400px] max-w-full w-[800px] -translate-x-1/2 -translate-y-1/2 opacity-10 blur-[100px] ${backgroundVariants[color || 'green']}`}
 >
 </div>

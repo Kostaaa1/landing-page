@@ -1,26 +1,42 @@
 ---
+import { navList } from '../state'
 import Hamburger from './Hamburger.astro'
 import List from './List.astro'
+import LoginBtn from '../components/LoginBtn.astro'
 ---
 
-<header class="z-20 w-screen border-b border-gray-600 border-opacity-40">
-	<nav class="flex h-20 items-center justify-between px-8 max-[768px]:px-4">
+<header
+	x-on:resize.window="open = open && isMobile, isMobile = window.innerWidth <= 768"
+	x-data="{open: false, isMobile: window.innerWidth <= 768}"
+	class="z-20 w-screen border-b border-gray-600 border-opacity-40"
+>
+	<nav class="flex h-[74px] items-center justify-between px-8 max-[768px]:px-4">
 		<p class="w-full font-semibold tracking-wide">upstash</p>
-		<ul role="list" class="flex max-[768px]:hidden">
-			<List text="Pricing" e />
-			<List text="Docs" e />
-			<List text="Resources" e />
-			<List text="Company" e />
-		</ul>
-		<div class="flex w-full justify-end max-[768px]:hidden">
-			<button
-				class="flex w-max items-center justify-center rounded-3xl bg-zinc-900 px-6 py-[6px] transition hover:bg-emerald-500 hover:text-slate-900"
-			>
-				Login
-			</button>
-		</div>
-		<div class="hidden max-[768px]:flex">
+		<template x-if="!isMobile">
+			<ul class="flex" role="list">
+				{navList.map(({ id, text, url }) => <List id={id} text={text} url={url} />)}
+			</ul>
+		</template>
+		<template x-if="!isMobile">
+			<div class="flex w-full justify-end">
+				<LoginBtn />
+			</div>
+		</template>
+		<template x-if="isMobile">
 			<Hamburger />
-		</div>
+		</template>
+		<template x-if="open && isMobile">
+			<div
+				class="absolute left-0 top-[81px] z-50 flex h-max w-screen select-none flex-col items-center justify-evenly bg-[#09090b] pb-4"
+			>
+				<ul role="list" class="flex w-full flex-col items-center pb-2">
+					{navList.map(({ id, text, url }) => <List id={id} text={text} url={url} />)}
+				</ul>
+				<div class="w-full px-4">
+					<LoginBtn />
+				</div>
+			</div>
+		</template>
 	</nav>
 </header>
+<!-- bg-[] -->

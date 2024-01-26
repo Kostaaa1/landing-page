@@ -6,15 +6,8 @@ interface Props {
 	about: string
 }
 
-import { backgroundVariants } from '../utils/state'
+import { buttonVariants } from '../state'
 const { color, text, about, btnText } = Astro.props
-
-const buttonVariants = {
-	blue: `group-hover:${backgroundVariants[color]}`,
-	red: `group-hover:${backgroundVariants[color]}`,
-	green: `group-hover:${backgroundVariants[color]}`,
-	purple: `group-hover:${backgroundVariants[color]}`
-}
 ---
 
 <div
@@ -24,13 +17,12 @@ const buttonVariants = {
 	hx-trigger="mouseenter"
 	hx-vals=`{"color": "${color}"}`
 	id={color}
-	class="group relative z-20 flex h-[200px] max-h-full w-[300px] cursor-default flex-col items-center justify-center bg-emerald-500 bg-white/5 text-center backdrop-blur transition first:rounded-l-3xl last:rounded-r-3xl hover:scale-[1.02] hover:bg-white/10 max-[768px]:w-full max-[768px]:first:rounded-b max-[768px]:first:rounded-t-3xl max-[768px]:last:rounded-b-3xl max-[768px]:last:rounded-t"
+	class="group relative z-10 flex h-[200px] max-h-full w-[300px] cursor-default flex-col items-center justify-center bg-emerald-500 bg-white/5 p-5 text-center backdrop-blur transition first:rounded-l-[32px] last:rounded-r-[32px] hover:scale-[1.02] hover:bg-white/10 max-[768px]:h-max max-[768px]:w-full max-[768px]:first:rounded-b max-[768px]:first:rounded-t-[32px] max-[768px]:last:rounded-b-[32px] max-[768px]:last:rounded-t"
 >
 	<h3 class="text-2xl">{text}</h3>
-	<p class="my-4 break-words text-white/50">{about}</p>
+	<p class="break-words pb-3 pt-1 text-white/50">{about}</p>
 	<button
-		id="btn"
-		class={`rounded-2xl bg-white p-2 px-3 text-sm text-black transition-all duration-200 ${buttonVariants[color || 'white']} group-hover:text-white`}
+		class={`rounded-2xl py-2 px-3 text-black max-[768px]:text-sm transition-all bg-white duration-200 ${buttonVariants[color || 'white']} group-hover:text-white`}
 		>{btnText}
 	</button>
 </div>
