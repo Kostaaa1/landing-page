@@ -1,26 +1,41 @@
-export const cards = [
+interface Cards {
+	text: string
+	about: string
+	btnText: string
+	color: 'red' | 'blue' | 'purple' | 'green'
+}
+
+export const cards: Cards[] = [
 	{
-		id: 0,
 		text: 'Redis',
 		about: 'Serverless database with Redis API',
 		btnText: 'Create Database',
-		fromColor: '#ef4444',
-		toColor: '#fca5a5'
+		color: 'red'
 	},
 	{
-		id: 1,
 		text: 'Kafka',
 		about: 'Serverless Kafka and Connectors',
 		btnText: 'Create Cluster',
-		fromColor: '#5b21b6',
-		toColor: '#c4b5fd'
+		color: 'purple'
 	},
 	{
-		id: 2,
 		text: 'QStash',
 		about: 'Messaging for the Serverless',
 		btnText: 'Publish Messages',
-		fromColor: '#0369a1',
-		toColor: '#67e8f9'
+		color: 'blue'
 	}
 ]
+
+export const gradientVariants = {
+	blue: 'from-blue-500 to-blue-300',
+	red: 'from-red-500 to-red-300',
+	green: 'from-emerald-500 to-yellow-300',
+	purple: 'from-purple-500 to-purple-300'
+}
+
+export const backgroundVariants = {
+	blue: 'bg-blue-500',
+	red: 'bg-red-500',
+	green: 'bg-emerald-500',
+	purple: 'bg-purple-500'
+}

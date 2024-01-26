@@ -1,0 +1,27 @@
+---
+import { gradientVariants, backgroundVariants } from '../utils/state'
+let color: 'red' | 'green' | 'blue' | 'purple' = 'green'
+if (Astro.request.method === 'GET') {
+	color = Astro.request.url.split('=')[1] as 'red' | 'green' | 'blue' | 'purple'
+}
+export const partial = true
+---
+
+<div
+	id="header"
+	class={`bg-gradient-to-r from-20% bg-clip-text text-transparent ${gradientVariants[color || 'green']}`}
+>
+	<h1
+		class="break-words text-center text-6xl font-bold max-[320px]:text-5xl sm:text-7xl md:text-8xl 2xl:text-9xl"
+	>
+		<span> Serverless</span>
+		<br />
+		<span> Data Platform </span>
+	</h1>
+</div>
+<div
+	id="splat"
+	hx-swap-oob="true"
+	class={`w-max-full absolute left-1/2 top-1/2 -z-10 h-[400px] w-full -translate-x-1/2 -translate-y-1/2 bg-opacity-5 blur-[100px] ${backgroundVariants[color || 'green']}`}
+>
+</div>

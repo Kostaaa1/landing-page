@@ -1,62 +1,23 @@
 ---
 import Card from '../components/Card.astro'
+import Header from '../pages/header.astro'
 import { cards } from '../utils/state'
 ---
 
 <div class="relative flex h-full w-full flex-col items-center justify-evenly px-6 max-[768px]:p-2">
-	<div class={`header bg-gradient-to-r from-20% bg-clip-text text-transparent`}>
-		<h1
-			class="break-words text-center text-6xl font-bold max-[320px]:text-5xl sm:text-7xl md:text-8xl 2xl:text-9xl"
-		>
-			<span> Serverless</span>
-			<br />
-			<span> Data Platform </span>
-		</h1>
-	</div>
+	<Header />
 	<div
-		class="splat w-max-full absolute left-1/2 top-1/2 h-[500px] w-full max-w-[600px] -translate-x-1/2 -translate-y-1/2 bg-opacity-5 blur-[100px]"
+		hx-get="/header"
+		hx-target="#header"
+		hx-swap="outerHTML"
+		hx-trigger="mouseleave"
+		hx-vals=`{"color": "green"}`
+		class="flex w-full items-center justify-center gap-2 max-[768px]:flex-wrap"
 	>
-	</div>
-	<div class="flex w-full items-center justify-center gap-1 max-[768px]:flex-wrap">
 		{
-			cards.map(({ about, fromColor, toColor, id, text, btnText }) => (
-				<Card
-					fromColor={fromColor}
-					toColor={toColor}
-					about={about}
-					id={id}
-					text={text}
-					btnText={btnText}
-				/>
+			cards.map(({ about, color, text, btnText }) => (
+				<Card about={about} color={color} text={text} btnText={btnText} />
 			))
 		}
 	</div>
 </div>
-<style>
-	.header {
-		background: linear-gradient(to right, #10b981, #fde047);
-		-webkit-background-clip: text;
-		background-clip: text;
-		color: transparent;
-		display: inline-block;
-	}
-
-	.splat {
-		background-color: #10b981;
-		opacity: 0.1;
-	}
-</style>
-<script>
-	import { atomCOlor } from '../store'
-	const h1 = document.querySelector('.header') as HTMLElement
-	const splat = document.querySelector('.splat') as HTMLElement
-
-	atomCOlor.listen((color) => {
-		const { from, to } = color
-		h1!.style.background = `linear-gradient(to right, ${from}, ${to})`
-		splat!.style.background = from
-		h1.style.webkitBackgroundClip = 'text'
-		h1.style.backgroundClip = 'text'
-		h1.style.color = 'transparent'
-	})
-</script>
