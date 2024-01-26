@@ -1,0 +1,26 @@
+---
+import Hamburger from './Hamburger.astro'
+import List from './List.astro'
+---
+
+<header class="z-20 w-screen border-b border-gray-600 border-opacity-40">
+	<nav class="flex h-20 items-center justify-between px-8 max-[768px]:px-4">
+		<p class="w-full font-semibold tracking-wide">upstash</p>
+		<ul role="list" class="flex max-[768px]:hidden">
+			<List text="Pricing" e />
+			<List text="Docs" e />
+			<List text="Resources" e />
+			<List text="Company" e />
+		</ul>
+		<div class="flex w-full justify-end max-[768px]:hidden">
+			<button
+				class="flex w-max items-center justify-center rounded-3xl bg-zinc-900 px-6 py-[6px] transition hover:bg-emerald-500 hover:text-slate-900"
+			>
+				Login
+			</button>
+		</div>
+		<div class="hidden max-[768px]:flex">
+			<Hamburger />
+		</div>
+	</nav>
+</header>

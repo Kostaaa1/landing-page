@@ -1,0 +1,9 @@
+---
+const { text } = Astro.props
+---
+
+<li
+	class="mr-2 rounded-2xl px-4 py-[6px] text-white/50 transition last:mr-0 hover:bg-white/10 hover:text-white"
+>
+	<a href={`/${text.toLowerCase()}`}> {text} </a>
+</li>
